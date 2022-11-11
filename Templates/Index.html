@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <style>
+            div {
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                align-items: center;
+                justify-content: center;
+            }
+            button {
+                width: 20rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h3>Today's dog facts</h3>
+            <p id="fact">{{fact}}</p>
+            <button onclick="refresh()">Refresh</button>
+        </div>
+    </body>
+    <script>
+        async function refresh() {
+            let text = await fetch("index.html").then(resp => resp.text())
+            let templateElement = document.createElement("html")
+            templateElement.innerHTML = text
+            let node = templateElement.querySelector("#fact")
+            let fact = node.innerHTML 
+            document.getElementById("fact").innerText = fact
+        }
+    </script>
+</html>
